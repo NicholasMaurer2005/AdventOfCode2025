@@ -27,6 +27,9 @@
     <ClCompile Include="SplitString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper.h">
@@ -41,5 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Day1.txt" />
+    <Text Include="Day2.txt" />
   </ItemGroup>
 </Project>
