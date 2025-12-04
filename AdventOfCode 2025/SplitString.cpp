@@ -48,7 +48,7 @@ bool SplitString::Iterator::operator!=(const Iterator& other) const noexcept
 
 //SplitString
 SplitString::SplitString(std::string_view data, char character) noexcept
-	: m_data(data), m_character(character) { }
+	: m_data(std::string_view(data.begin(), std::ranges::find(data, '\0'))), m_character(character) {}
 
 SplitString::Iterator SplitString::begin() const noexcept
 {
