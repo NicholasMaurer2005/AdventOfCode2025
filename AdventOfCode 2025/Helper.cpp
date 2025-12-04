@@ -53,6 +53,7 @@ public:
 static PerfomanceLogger performanceLogger;
 
 
+
 //Helper implementation
 std::string readFile(std::string_view file) noexcept
 {
@@ -66,6 +67,5 @@ std::string readFile(std::string_view file) noexcept
 
 	return data;
 }
-
 
 
