@@ -21,7 +21,7 @@ class Solution1
 
 	bool test(int x, int y) const noexcept
 	{
-		return x >= 0 && x < width && y >= 0 && y < height && (data[y * width + x] == '@');
+		return x >= 0 && x < width && y >= 0 && y < height && data[y * width + x] == '@';
 	}
 
 public:
@@ -86,10 +86,18 @@ class Solution2
 	std::string data{ readFile("Day4.txt") };
 	int width{};
 	int height{};
+	int totalCount{};
 
 	bool test(int x, int y) const noexcept
 	{
-		return x >= 0 && x < width && y >= 0 && y < height && (data[y * width + x] == '@');
+		return x >= 0 && x < width && y >= 0 && y < height && (data[y * width + x] == '@' || data[y * width + x] == 'x');
+	}
+
+	void filter() noexcept
+	{
+		std::ranges::transform(data, data.begin(), [](char c) {
+			return c == 'x' ? '.' : c;
+			});
 	}
 
 public:
@@ -103,42 +111,53 @@ public:
 
 		int count{};
 
-		for (int y{}; y < height; ++y)
+		do
 		{
-			for (int x{}; x < width - 1; ++x)
+			count = 0;
+
+			for (int y{}; y < height; ++y)
 			{
-				int adjacentCount{};
-
-				if (data[y * width + x] != '@')
+				for (int x{}; x < width - 1; ++x)
 				{
-					continue;
-				}
+					int adjacentCount{};
 
-				//N
-				if (test(x, y - 1)) ++adjacentCount;
-				//NE
-				if (test(x + 1, y - 1)) ++adjacentCount;
-				//E
-				if (test(x + 1, y)) ++adjacentCount;
-				//SE
-				if (test(x + 1, y + 1)) ++adjacentCount;
-				//S
-				if (test(x, y + 1)) ++adjacentCount;
-				//SW
-				if (test(x - 1, y + 1)) ++adjacentCount;
-				//W
-				if (test(x - 1, y)) ++adjacentCount;
-				//NW
-				if (test(x - 1, y - 1)) ++adjacentCount;
+					if (data[y * width + x] != '@')
+					{
+						continue;
+					}
 
-				if (adjacentCount < 4)
-				{
-					++count;
+					//N
+					if (test(x, y - 1)) ++adjacentCount;
+					//NE
+					if (test(x + 1, y - 1)) ++adjacentCount;
+					//E
+					if (test(x + 1, y)) ++adjacentCount;
+					//SE
+					if (test(x + 1, y + 1)) ++adjacentCount;
+					//S
+					if (test(x, y + 1)) ++adjacentCount;
+					//SW
+					if (test(x - 1, y + 1)) ++adjacentCount;
+					//W
+					if (test(x - 1, y)) ++adjacentCount;
+					//NW
+					if (test(x - 1, y - 1)) ++adjacentCount;
+
+					if (adjacentCount < 4)
+					{
+						++count;
+						data[y * width + x] = 'x';
+					}
+
 				}
 			}
-		}
 
-		std::cout << count << std::endl;
+			filter();
+			totalCount += count;
+
+		} while (count > 0);
+
+		std::cout << totalCount << std::endl;
 	}
 };
 
