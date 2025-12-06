@@ -13,5 +13,8 @@ int main()
 	//Day3Part2();
 
 	//Day4Part1();
-	Day4Part2();
+	//Day4Part2();
+
+	Day5Part1();
+	//Day5Part2();
 }

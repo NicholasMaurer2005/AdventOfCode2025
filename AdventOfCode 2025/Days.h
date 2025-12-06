@@ -17,3 +17,7 @@ void Day3Part2() noexcept;
 void Day4Part1() noexcept;
 
 void Day4Part2() noexcept;
+
+void Day5Part1() noexcept;
+
+void Day5Part2() noexcept;
